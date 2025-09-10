@@ -20,3 +20,19 @@ export const addExpense = async (req, res) => {
     });
   }
 };
+
+export const updateExpense = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Expense.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    return res.status(200).json({
+      message: "Expense updated successfully.",
+    });
+  } catch (e) {
+    return res.status(500).json({
+      message: "Internal Server error",
+    });
+  }
+};
